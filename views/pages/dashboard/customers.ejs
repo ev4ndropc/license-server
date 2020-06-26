@@ -1,0 +1,141 @@
+<%- include('../../partials/header.ejs') %>
+
+<body background="/images/bg.png">
+
+<%- include('../../partials/navbar.ejs') %>
+
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      Customers
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Product</th>
+            <th scope="col">Domain</th>
+            <th scope="col">Valid Until</th>
+            <th scope="col">Banned</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%customerData.forEach(customer => {%>
+          <tr>
+            <th scope="row"><%= customer.id %></th>
+            <td><%= customer.name %></td>
+            <td><a href="mailto:<%= customer.email %>"><%= customer.email %></a></td>
+            <td><%= customer.product %></td>
+            <td><a href="http://<%= customer.domain %>"><%= customer.domain %></a></td>
+            <td><%= customer.date %></td>
+            <%if(customer.isBanned == 1){%>
+            <td class="d-flex justify-content-center align-items-center"><span class="banned-true"></span></td>
+            <%}if(customer.isBanned == 0){%>
+            <td class="d-flex justify-content-center align-items-center"><span class="banned-false"></span></td>
+            <%}%>
+            <td>
+              <%if(customer.isBanned == 1){%>
+              <a href="/unban/<%= customer.id %>" class="btn btn-success">Unban</a>
+              <%}%>
+              <%if(customer.isBanned == 0){%>
+                <a href="/ban/<%= customer.id %>" class="btn btn-warning">Ban</a>
+              <%}%>
+              <a href="/delete-customer/<%= customer.id %>" href="javascript:void(0)" data-toggle="modal" type="button" data-target="#code-<%= customer.id %>"" class="btn btn-primary">Edit</a>
+              <a href="/delete-customer/<%= customer.id %>" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+
+
+
+  <% customerData.forEach(customer => { %>
+    <div class="modal fade" id="code-<%= customer.id %>" aria-labelledby="<%= customer.name %>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="<%= customer.code %>">Edit <strong><%= customer.name %></strong></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="far fa-times"></i>
+            </button>
+            </div>
+            <form  class="form-check pd-0 w-100" method="POST" action="/codes/update/<%= customer.id %>">
+            <div class="modal-body">
+                    <div class="w-100 container-edit-customer">
+                        <label class="mt-2" for="name">Name</label>
+                        <div class="container-icon">
+                            <i class="fal fa-user"></i>
+                        </div>
+                        <input type="text" class="form-control w-100" name="name" value="<%= customer.name %>">
+
+                        <label class="mt-2" for="whatsapp">Contact</label>
+                        <div class="container-icon">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <input type="tel" class="form-control w-100" name="email" value="<%= customer.email %>">
+
+                        <label class="mt-2" for="code">Product</label>
+                        <div class="container-icon">
+                            <i class="fal fa-box"></i>
+                        </div>
+                        <input type="text" class="form-control w-100" name="product" value="<%= customer.product %>">
+
+                        <label class="mt-2" for="code">Domain</label>
+                        <div class="container-icon">
+                            <i class="fal fa-clock"></i>
+                        </div>
+                        <input type="text" class="form-control w-100" name="domain" value="<%= customer.domain %>">
+
+                        <label class="mt-2" for="code">Valid Until</Datag></label>
+                        <div class="container-icon">
+                            <i class="fal fa-calendar"></i>
+                        </div>
+                        <input type="date" class="form-control w-100" name="date" value="<%= customer.date %>">
+
+                    </div>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    <% }) %>
+
+
+
+
+
+</div>
+<%if (message != '' && message.startsWith('There')) {%>
+  <script>
+      Swal.fire({
+        icon: 'error',
+        text: `<%= message %>`,
+      });
+  </script>
+<%}%>
+
+<%if (message != '' && message.startsWith('User')) {%>
+  <script>
+      Swal.fire({
+        icon: 'success',
+        text: `<%= message %>`,
+      });
+  </script>
+<%}%>
+</body>
+
+<%- include('../../partials/footer.ejs') %>

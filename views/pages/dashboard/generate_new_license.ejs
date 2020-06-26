@@ -1,0 +1,38 @@
+<%- include('../../partials/header.ejs') %>
+
+<body background="/images/bg.png">
+
+<%- include('../../partials/navbar.ejs') %>
+
+
+<div class="container mt-3">
+  <div class="card">
+    <pre>
+      <code class="language-javascript">
+        <%= code %>
+      </code>
+    </pre>
+  </div>
+</div>
+
+<%if (message != '' && message.startsWith('There')) {%>
+  <script>
+      Swal.fire({
+        icon: 'error',
+        text: `<%= message %>`,
+      });
+  </script>
+<%}%>
+
+<%if (message != '' && message.startsWith('User')) {%>
+  <script>
+      Swal.fire({
+        icon: 'success',
+        text: `<%= message %>`,
+      });
+  </script>
+<%}%>
+<script src="./node_modules/javascript-obfuscator/dist/index.browser.js"></script>
+</body>
+
+<%- include('../../partials/footer.ejs') %>

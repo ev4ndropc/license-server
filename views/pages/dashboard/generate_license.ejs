@@ -1,0 +1,46 @@
+<%- include('../../partials/header.ejs') %>
+
+<body background="/images/bg.png">
+
+<%- include('../../partials/navbar.ejs') %>
+
+
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">
+      Generate
+    </div>
+    <div class="card-body">
+      <form class="form" action="/generate_new" method="POST">
+        <select class="form-control" name="domain">
+          <option name="">Choose domain</option>
+          <%customers.forEach(domain => {%>
+            <option name="<%= domain.domain %>"><%= domain.domain %></option>
+          <%})%>
+        </select>
+        <button class="btn custom text-white mt-2">Create</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%if (message != '' && message.startsWith('There')) {%>
+  <script>
+      Swal.fire({
+        icon: 'error',
+        text: `<%= message %>`,
+      });
+  </script>
+<%}%>
+
+<%if (message != '' && message.startsWith('User')) {%>
+  <script>
+      Swal.fire({
+        icon: 'success',
+        text: `<%= message %>`,
+      });
+  </script>
+<%}%>
+</body>
+
+<%- include('../../partials/footer.ejs') %>

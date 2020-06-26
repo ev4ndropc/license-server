@@ -1,0 +1,38 @@
+<%- include('../../partials/header.ejs') %>
+
+<body background="/images/bg.png">
+  <div class="container login">
+    <div class="card-body card-1">
+      <form class="form-signin" method="POST" action="/login">
+        <img class="mb-4" src="/images/logo.png" alt="" width="272" height="90">
+        <h1 class="h3 mb-5 font-weight-normal">Please sign in</h1>
+
+        <div class="form-input w-100 mb-4">
+          <input type="email" class="form-control" name="email" required />
+          <label for="inputEmail" class="">Email address</label>
+        </div>
+
+        <div class="form-input w-100">
+          <input type="password" class="form-control" name="password" required  />
+          <label for="inputPassword" class="">Password</label>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block mt-5 custom" type="submit">
+          <i class="fas fa-sign-in-alt"></i>
+          Sign in
+        </button>
+      </form>
+    </div>
+  </div>
+  <%if (message != '') {%>
+    <script>
+        Swal.fire({
+          icon: 'error',
+          text: `<%= message %>`,
+        });
+    </script>
+  <%}%>
+  <script src="/js/moment.js"></script>
+</body>
+
+<%- include('../../partials/footer.ejs') %>
