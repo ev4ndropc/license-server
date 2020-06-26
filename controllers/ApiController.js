@@ -42,8 +42,8 @@ module.exports = {
         var emailASerEnviado = {
           from: process.env.SMTP_FROM,
           to: process.env.SMTP_TO,
-          subject: 'License Server - Access not allowed',
-          text: emailData,
+          subject: '✔ License Server - Access not allowed',
+          html: emailData,
         };
 
         remetente.sendMail(emailASerEnviado, function(error){
