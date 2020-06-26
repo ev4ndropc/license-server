@@ -29,8 +29,8 @@ module.exports = {
 
 
         var emailASerEnviado = {
-          from: process.env.SMTP_PASS,
-          to: process.env.SMTP_PASS,
+          from: process.env.SMTP_FROM,
+          to: process.env.SMTP_TO,
           subject: 'License Server - Access not allowed',
           html: 'Estou te enviando este email com node.js',
         };
