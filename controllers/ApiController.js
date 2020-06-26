@@ -32,7 +32,7 @@ module.exports = {
           <p><strong>Domain:</strong> <a href="https://${domain}">${domain}</a></p>
           <p><strong>Domain allowed:</strong> <a href="https://${findCustomer.domain}">${findCustomer.domain}</a></p>
           <p><strong>Contact:</strong> <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
-          <a style="text-decoration:none; padding: 12px; display: flex; justify-content: center; align-items: center;" href="${getFullUrl(request)}/ban/${key}"><span style="max-width:250px border-radius: 8px; background: #603ba9; color: #fff">Ban this user?</span></a>
+          <a style="text-decoration:none; padding: 12px; display: flex; justify-content: center; align-items: center;" href="${getFullUrl(request)}/ban-this/${key}"><span style="max-width:250px border-radius: 8px; background: #603ba9; color: #fff">Ban this user?</span></a>
           `
 
           let testAccount = await nodemailer.createTestAccount();
