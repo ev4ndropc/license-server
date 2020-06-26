@@ -22,37 +22,44 @@ module.exports = {
 
       if(findCustomer.isBanned == 0){
 
-        var remetente = nodemailer.createTransport({
-          host: process.env.SMTP_HOST,
-          port: process.env.SMTP_PORT,
-          secure: process.env.SMTP_SECURE,
-          auth:{
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS }
-        });
+        async function main() {
 
-        var emailData = `
-        <p>Name: ${findCustomer.name}<p>
-        <p>Domain: ${domain}<p>
-        <p>Domain allowed: ${findCustomer.domain}<p>
-        <p>Contact: <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
-        <a href="${getFullUrl(request)}/">Ban this user?</a>
-        `
+          var emailData = `
+          <p>Name: ${findCustomer.name}<p>
+          <p>Domain: ${domain}<p>
+          <p>Domain allowed: ${findCustomer.domain}<p>
+          <p>Contact: <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
+          <a href="${getFullUrl(request)}/">Ban this user?</a>
+          `
 
-        var emailASerEnviado = {
-          from: process.env.SMTP_FROM,
-          to: process.env.SMTP_TO,
-          subject: '✔ License Server - Access not allowed',
-          html: emailData,
-        };
+          let testAccount = await nodemailer.createTestAccount();
 
-        remetente.sendMail(emailASerEnviado, function(error){
-          if (error) {
-          console.log(error);
-          } else {
 
-          }
-        });
+          let transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            secure: true,
+            auth: {
+              user: process.env.SMTP_USER,
+              pass: process.env.SMTP_PASS
+            },
+          });
+
+
+          let info = await transporter.sendMail({
+            from: process.env.SMTP_FROM,
+            to: process.env.SMTP_TO,
+            subject: "✔ License Server - Access not allowed",
+            text: "Hello world?",
+            html: emailData,
+          });
+
+          console.log("Message sent: %s", info.messageId);
+
+          console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        }
+
+        main().catch(console.error);
 
       }
 
