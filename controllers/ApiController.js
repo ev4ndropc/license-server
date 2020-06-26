@@ -25,11 +25,14 @@ module.exports = {
         async function main() {
 
           var emailData = `
+          <a href="${getFullUrl(request)}" style="display: flex; justify-content: center; align-items: center;">
+            <img src="https://license-eyvindur.herokuapp.com/images/logo.png" widt="150px"/>
+          </a>
           <p><strong>Name:</strong> ${findCustomer.name}<p>
-          <p><strong>Domain:</strong> ${domain}<p>
-          <p><strong>Domain allowed:</strong> ${findCustomer.domain}<p>
+          <p><strong>Domain:</strong> <a href="${domain}">${domain}</a><p>
+          <p><strong>Domain allowed:</strong> <a href="${findCustomer.domain}">${findCustomer.domain}</a><p>
           <p><strong>Contact:</strong> <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
-          <a href="${getFullUrl(request)}/ban-this/${key}">Ban this user?</a>
+          <a style="text-decoration:none; padding: 12px; display: flex; justify-content: center; align-items: center;" href="${getFullUrl(request)}/ban/${key}"><span style="max-width:250px border-radius: 8px; background: #603ba9; color: #fff">Ban this user?</span></a>
           `
 
           let testAccount = await nodemailer.createTestAccount();
