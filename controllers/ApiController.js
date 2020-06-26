@@ -1,6 +1,10 @@
 const nodemailer = require('nodemailer');
 const Customer = require('../models/Customers');
 
+const getFullUrl = (request) =>{
+  const url = 'https://' + request.get('host');
+  return url;
+}
 
 module.exports = {
   async CheckLicense (request, response) {
@@ -27,6 +31,13 @@ module.exports = {
           pass: process.env.SMTP_PASS }
         });
 
+        var emailData = `
+        <p>Name: ${findCustomer.name}<p>
+        <p>Domain: ${domain}<p>
+        <p>Domain allowed: ${findCustomer.domain}<p>
+        <p>Contact: <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
+        <a href="${getFullUrl(request)}/">Ban this user?</a>
+        `
 
         var emailASerEnviado = {
           from: process.env.SMTP_FROM,
