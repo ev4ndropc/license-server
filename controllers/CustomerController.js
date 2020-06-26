@@ -55,4 +55,14 @@ module.exports = {
       response.redirect('/customers')
     }
   },
+  async BanThis (request, response) {
+    let sessionUser = request.session.user;
+    const key = request.params.key;
+    await Customer.update(
+      { isBanned: true },
+      { where: { key } }
+    )
+
+
+  }
 }

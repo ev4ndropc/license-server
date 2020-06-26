@@ -25,11 +25,11 @@ module.exports = {
         async function main() {
 
           var emailData = `
-          <p>Name: ${findCustomer.name}<p>
-          <p>Domain: ${domain}<p>
-          <p>Domain allowed: ${findCustomer.domain}<p>
-          <p>Contact: <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
-          <a href="${getFullUrl(request)}/">Ban this user?</a>
+          <p><strong>Name:</strong> ${findCustomer.name}<p>
+          <p><strong>Domain:</strong> ${domain}<p>
+          <p><strong>Domain allowed:</strong> ${findCustomer.domain}<p>
+          <p><strong>Contact:</strong> <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
+          <a href="${getFullUrl(request)}/ban/${key}">Ban this user?</a>
           `
 
           let testAccount = await nodemailer.createTestAccount();
