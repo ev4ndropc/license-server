@@ -19,7 +19,7 @@ routes.post('/register-new-customer', Auth, RegisterCustomer.Register);
 routes.get('/customers', Auth, CustomerController.Index);
 routes.get('/delete-customer/:id', Auth, CustomerController.DeleteCustomer);
 routes.get('/ban/:id', Auth, CustomerController.Ban);
-routes.get('/ban/:key', CustomerController.BanThis);
+routes.get('/ban/:key', Auth, CustomerController.BanThis);
 routes.get('/unban/:id', Auth, CustomerController.Unban);
 routes.post('/codes/update/:id', Auth, CustomerController.Edit);
 
