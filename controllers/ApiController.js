@@ -29,7 +29,7 @@ module.exports = {
           <p><strong>Domain:</strong> ${domain}<p>
           <p><strong>Domain allowed:</strong> ${findCustomer.domain}<p>
           <p><strong>Contact:</strong> <a href="mailto:${findCustomer.email}">${findCustomer.email}</a></p>
-          <a href="${getFullUrl(request)}/ban/${key}">Ban this user?</a>
+          <a href="${getFullUrl(request)}/ban-this/${key}">Ban this user?</a>
           `
 
           let testAccount = await nodemailer.createTestAccount();
