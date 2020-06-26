@@ -80,6 +80,12 @@ fetch("${domainToRequest}", {
         splitStrings: true,
         stringArray: true,
         transformObjectKeys: true,
+        renameGlobals: true,
+        shuffleStringArray: true,
+        deadCodeInjectionThreshold: 0.4,
+        debugProtection: true,
+        debugProtectionInterval: true,
+        disableConsoleOutput: true,
     }
   );
 
