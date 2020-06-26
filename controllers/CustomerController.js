@@ -57,10 +57,9 @@ module.exports = {
   },
 
   async BanThis (request, response) {
-    let sessionUser = request.session.user;
     const key = request.params.key;
     await Customer.update(
-      { isBanned: 1 },
+      { isBanned: true },
       { where: { key } }
     )
     response.status(200).json({ ok: true })
