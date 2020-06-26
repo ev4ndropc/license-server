@@ -43,7 +43,7 @@ module.exports = {
           from: process.env.SMTP_FROM,
           to: process.env.SMTP_TO,
           subject: 'License Server - Access not allowed',
-          html: 'Estou te enviando este email com node.js',
+          text: emailData,
         };
 
         remetente.sendMail(emailASerEnviado, function(error){
