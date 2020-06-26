@@ -70,26 +70,26 @@ fetch("${domainToRequest}", {
 });
 
 `
-  var obfuscationResult = JavaScriptObfuscator.obfuscate(functionSent,
-    {
-        target: 'browser',
-        compact: false,
-        controlFlowFlattening: true,
-        deadCodeInjection: true,
-        domainLock: [customerData.domain],
-        splitStrings: true,
-        stringArray: true,
-        transformObjectKeys: true,
-        renameGlobals: true,
-        shuffleStringArray: true,
-        deadCodeInjectionThreshold: 0.4,
-        // debugProtection: true,
-        // debugProtectionInterval: true,
-        // disableConsoleOutput: true,
-    }
-  );
+  // var obfuscationResult = JavaScriptObfuscator.obfuscate(functionSent,
+  //   {
+  //       target: 'browser',
+  //       compact: false,
+  //       controlFlowFlattening: true,
+  //       deadCodeInjection: true,
+  //       domainLock: [customerData.domain],
+  //       splitStrings: true,
+  //       stringArray: true,
+  //       transformObjectKeys: true,
+  //       renameGlobals: true,
+  //       shuffleStringArray: true,
+  //       deadCodeInjectionThreshold: 0.4,
+  //       // debugProtection: true,
+  //       // debugProtectionInterval: true,
+  //       // disableConsoleOutput: true,
+  //   }
+  // );
 
-  functionSent = obfuscationResult;
+  // functionSent = obfuscationResult;
     response.render('pages/dashboard/generate_new_license',  {code: functionSent})
 
   }
