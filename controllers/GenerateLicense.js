@@ -15,7 +15,7 @@ module.exports = {
     const { domain, product } = request.body;
 
     const getFullUrl = (request) =>{
-      const url = request.protocol + '://' + request.get('host');
+      const url = 'https://' + request.get('host');
       return url;
     }
 
@@ -41,29 +41,49 @@ fetch("${domainToRequest}", {
 .then(response => {
   return response.json();
 }).then(data => {
-  console.log(data)
+
+  var d = new Date();
+
+  var date = d.getDate();
+  var month = d.getMonth() + 1;
+  var year = d.getFullYear();
+
+  if(month <= 9) {
+      month = '0'+month
+  }
+
+  var dateString = year + "-" + month + "-" + date;
+
+  var responseDate = data.findCustomer.date
+  var currentDate = dateString
+
+
   if(data.ok == false){
+    $('html').remove();
+  }
+  if(responseDate < currentDate) {
     $('html').remove();
   }
 })
 .catch(err => {
   $('html').remove();
 });
-`
-  // var obfuscationResult = JavaScriptObfuscator.obfuscate(functionSent,
-  //   {
-  //       target: 'browser',
-  //       compact: false,
-  //       controlFlowFlattening: true,
-  //       deadCodeInjection: true,
-  //       domainLock: [customerData.domain],
-  //       splitStrings: true,
-  //       stringArray: true,
-  //       transformObjectKeys: true,
-  //   }
-  // );
 
-  // functionSent = obfuscationResult;
+`
+  var obfuscationResult = JavaScriptObfuscator.obfuscate(functionSent,
+    {
+        target: 'browser',
+        compact: false,
+        controlFlowFlattening: true,
+        deadCodeInjection: true,
+        domainLock: [customerData.domain],
+        splitStrings: true,
+        stringArray: true,
+        transformObjectKeys: true,
+    }
+  );
+
+  functionSent = obfuscationResult;
     response.render('pages/dashboard/generate_new_license',  {code: functionSent})
 
   }
