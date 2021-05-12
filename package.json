@@ -17,7 +17,7 @@
     "javascript-obfuscator": "^1.1.0",
     "moment": "^2.27.0",
     "mysql2": "^2.1.0",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.16",
     "sequelize": "^5.21.3"
   },
   "author": "",
